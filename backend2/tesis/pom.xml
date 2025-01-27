@@ -117,7 +117,17 @@
             <artifactId>spring-dotenv</artifactId>
             <version>2.5.4</version>
         </dependency>
-
+        <!-- Inicio de sesion con google -->
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.34.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>1.42.0</version>
+        </dependency>
 
 
         <!-- JSON Web Token (JWT) -->

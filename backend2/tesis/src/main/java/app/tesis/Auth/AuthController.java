@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -24,4 +27,10 @@ public class AuthController {
     {
         return ResponseEntity.ok(authService.register(request));
     }
+
+    @PostMapping(value = "google-login")
+    public ResponseEntity<AuthResponse> googleLogin(@RequestBody GoogleLoginRequest googleRequest) throws GeneralSecurityException, IOException {
+        return ResponseEntity.ok(authService.googleLogin(googleRequest));
+    }
+
 }

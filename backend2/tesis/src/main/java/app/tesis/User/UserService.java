@@ -36,13 +36,13 @@ public class UserService {
        
         if (user!=null)
         {
-            UserDTO userDTO = UserDTO.builder()
+            return UserDTO.builder()
             .id(user.id)
-            .username(user.username)
+                    .username(user.username)
+            .email(user.email)
             .firstname(user.firstname)
             .lastname(user.lastname)
             .build();
-            return userDTO;
         }
         return null;
     }

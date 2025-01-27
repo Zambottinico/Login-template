@@ -27,6 +27,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     String username;
     @Column(nullable = false)
+    String email;
+
     String lastname;
     String firstname;
 
@@ -34,6 +36,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING) 
     Role role;
 
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider;
 
 
     @Override
