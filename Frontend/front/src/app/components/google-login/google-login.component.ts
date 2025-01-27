@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/auth/login.service';
 import { LoginGoogleRequest } from '../../models/LoginGoogleRequest';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-google-login',
   standalone: true,
+  imports: [],
   template: `
     <div id="google-button"></div>
   `,
@@ -15,9 +17,29 @@ export class GoogleLoginComponent implements OnInit {
   request:LoginGoogleRequest={
     idToken: ''
   };
-  constructor( private loginService: LoginService){}
+  registerError: any;
+  constructor( private loginService: LoginService, private router:Router){
+
+  }
   ngOnInit(): void {
     this.initializeGoogleSignIn();
+    
+  }
+  handleCredentialResponse(response: any): void {
+    console.log('ID Token de Google:', response.credential);
+    this.request.idToken = response.credential;
+    this.loginService.logingoogle(this.request).subscribe({
+       
+      error: (errorData) => {
+        console.error(errorData);
+        this.registerError=errorData;
+        
+      },
+      complete:()=> {
+          this.router.navigateByUrl('/home')
+      },
+
+    })
   }
 
   initializeGoogleSignIn(): void {
@@ -45,11 +67,5 @@ export class GoogleLoginComponent implements OnInit {
     };
   }
 
-  handleCredentialResponse(response: any): void {
-    console.log('ID Token de Google:', response.credential);
-    this.request.idToken = response.credential;
-    this.loginService.logingoogle(this.request).subscribe(data=>{
-      console.log(data);
-    });
-  }
+  
 }

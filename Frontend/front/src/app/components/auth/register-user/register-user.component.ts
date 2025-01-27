@@ -9,7 +9,7 @@ import { GoogleLoginComponent } from "../../google-login/google-login.component"
 @Component({
   selector: 'app-register-user',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterOutlet, RouterLink, FormsModule, GoogleLoginComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, FormsModule, GoogleLoginComponent],
   templateUrl: './register-user.component.html',
   styleUrl: './register-user.component.css',
 })
@@ -32,13 +32,13 @@ login() {
           console.error(errorData);
           this.registerError=errorData;
         },
-        complete() {
+        complete:()=> {
           if (this.redirect) {
-            this.router.navigateByUrl('/cabins');
+            this.router.navigateByUrl('/home');
           }else{
             this.loginEvent.emit(true);
           }
-          this.loginForm.reset();
+          this.registerForm.reset();
         },
 
       })

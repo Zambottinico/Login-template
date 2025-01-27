@@ -12,7 +12,6 @@ import {GoogleLoginComponent} from '../../google-login/google-login.component'
   standalone: true,
   imports: [CommonModule,
     ReactiveFormsModule,
-    RouterOutlet,
     RouterLink,
     GoogleLoginComponent
     ],
@@ -51,11 +50,12 @@ export class LoginComponent {
         error: (errorData) => {
           console.error(errorData);
           this.loginError=errorData;
+          
         },
         complete: () => {
           
           if (this.redirect) {
-            this.router.navigateByUrl('/cabins');
+            this.router.navigateByUrl('/home');
           }else{
             this.loginEvent.emit(true);
           }
