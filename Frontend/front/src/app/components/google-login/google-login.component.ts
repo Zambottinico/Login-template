@@ -10,7 +10,6 @@ import { Router, RouterLink } from '@angular/router';
   template: `
     <div id="google-button"></div>
   `,
-  styleUrls: ['./google-login.component.css']
 })
 export class GoogleLoginComponent implements OnInit {
   private clientId: string = '973932573847-5oncupn4hbm9sbqsgmi1sqka7iaeggf7.apps.googleusercontent.com'; 
