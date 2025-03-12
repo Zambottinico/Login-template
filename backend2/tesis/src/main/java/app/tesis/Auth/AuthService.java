@@ -28,7 +28,7 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        User user=userRepository.findByUsername(request.getUsername()).orElseThrow();
+        User user=userRepository.findByEmail(request.getUsername()).orElseThrow();
         String token=jwtService.getToken(user);
         Role role = userService.getRolUser(token);
         return AuthResponse.builder()
@@ -45,6 +45,9 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
+        if (userRepository.findByEmail(request.getUsername()).isPresent()) {
+            throw new RuntimeException("El correo electrónico ya está registrado.");
+        }
         User user = User.builder()
             .username(request.getUsername())
             .password(passwordEncoder.encode( request.getPassword()))
@@ -52,6 +55,7 @@ public class AuthService {
             .lastname(request.lastname)
                 .email(request.getUsername())
             .role(Role.USER)
+                .authProvider(AuthProvider.MANUAL)
             .build();
 
         userRepository.save(user);
@@ -65,7 +69,7 @@ public class AuthService {
                 .userName(user.getUsername())
                 .email(user.getEmail())
             .build();
-        
+
     }
 
     public AuthResponse googleLogin(GoogleLoginRequest googleRequest) throws GeneralSecurityException, IOException {

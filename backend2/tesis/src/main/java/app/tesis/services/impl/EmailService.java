@@ -15,11 +15,11 @@ import java.math.BigDecimal;
 @Service
 public class EmailService {
 
-    private final JavaMailSender mailSender; // Cambiado a final para asegurar la inyección correcta
+    private final JavaMailSender mailSender;
 
     @Autowired
     public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender; // Asignación a la variable final
+        this.mailSender = mailSender;
     }
 
 
@@ -29,6 +29,7 @@ public class EmailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
+        //TODO
         message.setFrom("zambottinico@gmail.com");
 
 

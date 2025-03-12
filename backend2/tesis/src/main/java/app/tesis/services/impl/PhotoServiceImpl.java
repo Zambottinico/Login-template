@@ -13,6 +13,7 @@ import java.util.UUID;
 @Service
 public class PhotoServiceImpl implements PhotoService {
 
+    //TODO
     private final String uploadDir = "uploads/cabins";
 
     public String savePhoto(MultipartFile photo) throws IOException {
