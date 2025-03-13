@@ -105,13 +105,14 @@ export class LoginService {
   }
 
   private handleError(error:HttpErrorResponse){
+    console.log(error);
     if(error.status===0){
       console.error('Se ha producio un error ', error.error);
     }
     else{
       console.error('Backend retornó el código de estado ', error);
     }
-    return throwError(()=> new Error('Algo falló. Por favor intente nuevamente.'));
+    return throwError(()=> new Error(error.error));
   }
 
   get userData():Observable<String>{
